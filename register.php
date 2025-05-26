@@ -17,12 +17,20 @@ if(isset($_POST['SUBMIT'])){
     }
     if($tempSQL->rowCount()>0){
         echo "username exists";
-        header ("refresh:2; url=signup_php");
+        header ("refresh:2; url=signup.php");
     }
     else{
         $sql="INSERT INTO users(name,surname,username,email,password) value(:name, :surname ,:username,:email,:password";
-
+        $insertSql->bindParam(':name',$name);
+        $insertSql->bindParam(':surname',$surname);
+        $insertSql->bindParam(':username',$username);
+        $insertSql->bindParam(':email',$email);
+        $insertSql->bindParam(':password',$password);
+        $insertSql->execute();
+        echo"Data saved";
+        header("refresh:2; url=login.php");
+    }
     }
 
-}
+
 ?>
